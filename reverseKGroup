@@ -1,0 +1,22 @@
+ public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode cur = head;
+        int n = 0;
+        // move the cur to start of next range
+        while (cur != null && n < k) {
+            cur = cur.next;
+            n++;
+        }
+        // we have enough nodes
+        if (n == k) {
+            cur = reverseKGroup(cur, k);
+            while (n-- > 0) {
+                ListNode newHead = head.next;
+                head.next = cur;
+                cur = head;
+                head = newHead;
+            }
+            head = cur;
+        }
+        return head;
+    }
+}
